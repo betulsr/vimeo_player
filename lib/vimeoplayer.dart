@@ -73,19 +73,23 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
       _qualityValue = value[value.lastKey()];
       _controller = VideoPlayerController.network(_qualityValue);
       _controller!.setLooping(looping == null ? false : true);
-      if (autoPlay!) _controller!.play();
+      // if (autoPlay!) {
+      //   print('Auto playing...');
+      //   _controller!.play();
+      // }
       initFuture = _controller!.initialize();
 
       //Обновление состояние приложения и перерисовка
       setState(() {
-        SystemChrome.setPreferredOrientations(
-            [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+        // SystemChrome.setPreferredOrientations(
+        //     [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+        _controller!.play();
       });
     });
 
     //На странице видео преимущество за портретной ориентацией
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+    // SystemChrome.setPreferredOrientations(
+    //     [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 
     super.initState();
@@ -110,8 +114,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
 
                   //Рассчет ширины и высоты видео плеера относительно сторон
                   // и ориентации устройства
-                  if (MediaQuery.of(context).orientation ==
-                          Orientation.portrait ||
+                  if (/*MediaQuery.of(context).orientation ==
+                          Orientation.landscape ||*/
                       delta < 0) {
                     videoHeight = MediaQuery.of(context).size.width /
                         _controller!.value.aspectRatio;
@@ -138,6 +142,8 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                         width: videoWidth,
                         margin: EdgeInsets.only(left: videoMargin),
                         child: VideoPlayer(_controller!),
+
+
                       ),
                       _videoOverlay(),
                     ],
@@ -264,6 +270,7 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                           VideoPlayerController.network(_qualityValue);
                       _controller!.setLooping(true);
                       _seek = true;
+
                       initFuture = _controller!.initialize();
                       _controller!.play();
                     }),
@@ -292,8 +299,6 @@ class _VimeoPlayerState extends State<VimeoPlayer> {
                         begin: Alignment.centerRight,
                         end: Alignment.centerLeft,
                         colors: [
-                          const Color(0x662F2C47),
-                          const Color(0x662F2C47)
                         ],
                       ),
                     ),

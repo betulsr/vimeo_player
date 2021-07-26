@@ -83,9 +83,9 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
     });
 
     setState(() {
-      SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-      SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+      // SystemChrome.setPreferredOrientations(
+      //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     });
 
     super.initState();
@@ -96,8 +96,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
   Future<bool> _onWillPop() {
     setState(() {
       _controller!.pause();
-      SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+      // SystemChrome.setPreferredOrientations(
+      //     [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
       SystemChrome.setEnabledSystemUIOverlays(
           [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     });
@@ -123,8 +123,8 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                       double delta = MediaQuery.of(context).size.width -
                           MediaQuery.of(context).size.height *
                               _controller!.value.aspectRatio;
-                      if (MediaQuery.of(context).orientation ==
-                              Orientation.portrait ||
+                      if (/*MediaQuery.of(context).orientation ==
+                              Orientation.landscape ||*/
                           delta < 0) {
                         videoHeight = MediaQuery.of(context).size.width /
                             _controller!.value.aspectRatio;
@@ -350,10 +350,10 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
                     onPressed: () {
                       setState(() {
                         _controller!.pause();
-                        SystemChrome.setPreferredOrientations([
-                          DeviceOrientation.portraitDown,
-                          DeviceOrientation.portraitUp
-                        ]);
+                        /*SystemChrome.setPreferredOrientations([
+                          DeviceOrientation.landscapeRight,
+                          DeviceOrientation.landscapeLeft
+                        ]);*/
                         SystemChrome.setEnabledSystemUIOverlays(
                             [SystemUiOverlay.top, SystemUiOverlay.bottom]);
                       });
